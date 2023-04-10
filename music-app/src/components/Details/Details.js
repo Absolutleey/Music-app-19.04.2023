@@ -4,7 +4,7 @@ import { albumFactory } from "../../services/albumService";
 import { useService } from "../../hooks/useService";
 import { authContext } from "../../contexts/AuthContext";
 
-export const Details = () => {
+export const Details = ({onDelete}) => {
   const { userId } = useContext(authContext);
   const { albumId } = useParams();
   const [album, setAlbum] = useState([]);
@@ -19,13 +19,9 @@ export const Details = () => {
 
   const isOwner = album._ownerId === userId;
 
-  const onDeleteClick = async () => {
-    await albumService.delete(albumId);
-
-    // setAlbum((state) => state.filter((x) => x._id !== albumId));
+  const onDeleteClick =  () => {
+    onDelete(albumId);
     
-
-    navigate("/catalog");
   };
 
   return (

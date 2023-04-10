@@ -67,6 +67,15 @@ function App() {
     navigate(`/catalog/${values._id}`);
   };
 
+  const onDelete = async (albumId) => {
+    await albumService.delete(albumId);
+
+    setAlbum((state) => state.filter((x) => x._id !== albumId));
+    
+
+    navigate("/catalog");
+  };
+
   const contex = {
     registerSubmit,
     loginSubmit,
@@ -88,7 +97,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/search" element={<Search />} />
             <Route path="/catalog" element={<Catalog album={album} />} />
-            <Route path="/catalog/:albumId" element={<Details />} />
+            <Route path="/catalog/:albumId" element={<Details onDelete={onDelete} />} />
             <Route path="/logout" element={<Logout />} />
             
             <Route element={<RouteGuard />}>
