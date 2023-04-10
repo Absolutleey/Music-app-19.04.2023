@@ -6,9 +6,9 @@ import { useContext } from "react";
 export const RouteGuard = ({
     children,
 }) => {
-    const { isAuthenticated } = useContext(authContext)
+    const { isAutheticated } = useContext(authContext)
     
-    if (!isAuthenticated) {
+    if (!isAutheticated) {
         return <Navigate to="/login" />;
     }
 
